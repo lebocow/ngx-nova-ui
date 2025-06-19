@@ -1,35 +1,44 @@
 # Nova UI - Modern Angular UI Library
 
-A powerful, themeable Angular 20 UI component library with a comprehensive CSS variables-based design system.
+A modern Angular 20 UI component library built with signals, standalone components, and a CSS-first theming approach.
 
 ## ✨ Features
 
-- 🎨 **Advanced Theming System** - Runtime CSS variables for complete customization
-- 🌙 **Dark Mode Support** - Automatic dark mode with smart color adjustments
-- 🎯 **Design Tokens** - Comprehensive tokens for spacing, typography, shadows, and more
-- 🚀 **8 Pre-built Themes** - Inspired by Material, GitHub, Stripe, and more
+- 🎨 **CSS-First Theming** - Simple, customizable CSS variables
+- 🌙 **Dark Mode Support** - Built-in light and dark themes
 - 📦 **Tree-shakeable** - Import only what you need
 - 🔧 **Fully Typed** - Complete TypeScript support
 - ⚡ **Angular 20** - Built with latest Angular features and signals
+- 🚀 **Standalone Components** - No NgModules required
+- ⚙️ **Signal-based State** - Modern reactive patterns
 
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-npm install @nova-ui/ngx-nova-ui
+npm install ngx-nova-ui
 ```
 
 ### Basic Setup
 
-```typescript
-import { provideNovaTheme } from '@nova-ui/ngx-nova-ui';
+1. Import the CSS in your `styles.css`:
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideNovaTheme('#4f46e5'), // Your brand color
-  ],
-});
+```css
+@import 'ngx-nova-ui/styles/nova-ui.css';
+```
+
+2. Import components as needed:
+
+```typescript
+import { NovaButton } from 'ngx-nova-ui';
+
+@Component({
+  selector: 'app-root',
+  imports: [NovaButton],
+  template: `<nova-button>Click me</nova-button>`,
+})
+export class AppComponent {}
 ```
 
 ### Using Components
@@ -38,21 +47,27 @@ bootstrapApplication(AppComponent, {
 <nova-button variant="primary" (clicked)="handleClick()"> Click me </nova-button>
 ```
 
-### Using CSS Variables
+### Customizing Theme
+
+Override CSS variables in your styles:
 
 ```css
-.custom-card {
-  background: var(--nova-surface-surface);
-  padding: var(--nova-spacing-6);
-  border-radius: var(--nova-radius-lg);
-  box-shadow: var(--nova-shadow-md);
+:root {
+  --nova-primary: #4f46e5;
+  --nova-primary-foreground: #ffffff;
+  --nova-radius: 0.5rem;
+}
+
+/* Dark mode is applied automatically with .dark class */
+.dark {
+  --nova-background: #09090b;
+  --nova-foreground: #fafafa;
 }
 ```
 
-## 📚 Documentation
+## 📚 CSS Variables
 
-- [Component Build Order](./COMPONENT_BUILD_ORDER.md) - Roadmap for component development
-- [Angular 20 UI Library Guide](./Angular%2020%20UI%20Library.md) - Comprehensive development guide
+The library provides a comprehensive set of CSS variables for colors, spacing, typography, and more. All variables use the `--nova-` prefix for easy identification.
 
 ## 🛠️ Development
 
@@ -84,20 +99,24 @@ npm test
 npm run storybook
 ```
 
-## 🎨 Pre-built Themes
+## 🌙 Dark Mode
+
+Use the theme service to toggle dark mode:
 
 ```typescript
-import { themes } from '@nova-ui/ngx-nova-ui';
+import { NovaThemeService } from 'ngx-nova-ui';
 
-// Available themes:
-provideNovaTheme(themes.material); // Material Design inspired
-provideNovaTheme(themes.github); // GitHub inspired
-provideNovaTheme(themes.stripe); // Stripe inspired
-provideNovaTheme(themes.vercel); // Vercel inspired (dark)
-provideNovaTheme(themes.tailwind); // Tailwind UI inspired
-provideNovaTheme(themes.ant); // Ant Design inspired
-provideNovaTheme(themes.radix); // Radix UI inspired
-provideNovaTheme(themes.chakra); // Chakra UI inspired
+export class AppComponent {
+  private themeService = inject(NovaThemeService);
+
+  toggleTheme() {
+    this.themeService.toggleMode();
+  }
+
+  setDarkMode() {
+    this.themeService.setMode('dark');
+  }
+}
 ```
 
 ## 🏗️ Project Structure
@@ -109,17 +128,17 @@ ngx-nova-ui-workspace/
 │       ├── src/
 │       │   ├── lib/
 │       │   │   ├── components/   # UI components
-│       │   │   ├── theming/      # Theme system
-│       │   │   └── utils/        # Utilities
+│       │   │   ├── services/     # Theme service
+│       │   │   └── styles/       # CSS with variables
 │       │   └── public-api.ts     # Public exports
 │       └── ng-package.json       # Library config
-├── scripts/
-└── docs/                        # Documentation
+└── .storybook/               # Storybook configuration
 ```
 
-## 📦 Bundle Sizes
+## 📦 Available Components
 
-- **Core Library**: ~15KB (minified + gzipped)
+- **NovaButton** - Button component with variants and sizes
+- More components coming soon!
 
 ## 🤝 Contributing
 
@@ -131,14 +150,7 @@ MIT License - see LICENSE file for details
 
 ## 🙏 Acknowledgments
 
-Design inspiration from:
-
-- Material Design
-- Tailwind CSS
-- Ant Design
-- GitHub Primer
-- Stripe Elements
-- And many other excellent design systems
+CSS variables approach inspired by modern CSS-first design systems.
 
 ---
 

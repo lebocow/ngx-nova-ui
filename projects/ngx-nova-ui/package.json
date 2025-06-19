@@ -1,0 +1,32 @@
+{
+  "name": "ngx-nova-ui",
+  "version": "0.0.1",
+  "description": "A modern Angular 20 UI component library with signal-based architecture",
+  "keywords": [
+    "angular",
+    "ui",
+    "components",
+    "ngx",
+    "nova",
+    "angular-20",
+    "signals"
+  ],
+  "author": "ursachianualex@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ngx-nova-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ngx-nova-ui/issues"
+  },
+  "homepage": "https://github.com/yourusername/ngx-nova-ui#readme",
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

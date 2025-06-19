@@ -1,0 +1,146 @@
+:host {
+  display: inline-flex;
+
+  &.nova-button-host--full-width {
+    display: flex;
+  }
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--nova-radius-md);
+  font-weight: var(--nova-font-medium);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+
+  &:focus-visible {
+    outline: 2px solid var(--nova-ring);
+    outline-offset: 2px;
+  }
+
+  &.nova-button--full-width {
+    width: 100%;
+  }
+
+  &:disabled,
+  &.nova-button--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &.nova-button--primary {
+    background-color: var(--nova-primary);
+    color: var(--nova-primary-foreground);
+
+    &:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--nova-primary) 90%, transparent);
+    }
+  }
+
+  &.nova-button--secondary {
+    background-color: var(--nova-secondary);
+    color: var(--nova-secondary-foreground);
+
+    &:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--nova-secondary) 80%, transparent);
+    }
+  }
+
+  &.nova-button--danger {
+    background-color: var(--nova-destructive);
+    color: var(--nova-destructive-foreground);
+
+    &:hover:not(:disabled) {
+      background-color: color-mix(in srgb, var(--nova-destructive) 90%, transparent);
+    }
+  }
+
+  &.nova-button--ghost {
+    background-color: transparent;
+    color: var(--nova-foreground);
+
+    &:hover:not(:disabled) {
+      background-color: var(--nova-accent);
+      color: var(--nova-accent-foreground);
+    }
+  }
+
+  &.nova-button--outline {
+    background-color: transparent;
+    color: var(--nova-foreground);
+    border: 1px solid var(--nova-input);
+
+    &:hover:not(:disabled) {
+      background-color: var(--nova-accent);
+      color: var(--nova-accent-foreground);
+    }
+  }
+
+  &.nova-button--link {
+    background-color: transparent;
+    color: var(--nova-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0;
+    height: auto;
+
+    &:hover:not(:disabled) {
+      text-decoration: none;
+    }
+  }
+
+  &.nova-button--small {
+    height: var(--nova-spacing-9);
+    padding: 0 var(--nova-spacing-3);
+    font-size: var(--nova-text-xs);
+    gap: var(--nova-spacing-1-5);
+
+    &.nova-button--icon-only {
+      width: var(--nova-spacing-9);
+      padding: 0;
+    }
+  }
+
+  &.nova-button--medium {
+    height: var(--nova-spacing-10);
+    padding: 0 var(--nova-spacing-4);
+    font-size: var(--nova-text-sm);
+    gap: var(--nova-spacing-2);
+
+    &.nova-button--icon-only {
+      width: var(--nova-spacing-10);
+      padding: 0;
+    }
+  }
+
+  &.nova-button--large {
+    height: var(--nova-spacing-11);
+    padding: 0 var(--nova-spacing-8);
+    font-size: var(--nova-text-base);
+    gap: var(--nova-spacing-2);
+
+    &.nova-button--icon-only {
+      width: var(--nova-spacing-11);
+      padding: 0;
+    }
+  }
+
+  svg {
+    width: var(--nova-spacing-4);
+    height: var(--nova-spacing-4);
+    flex-shrink: 0;
+  }
+}

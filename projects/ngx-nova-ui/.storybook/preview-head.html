@@ -1,0 +1,33 @@
+<!-- Import the Nova UI CSS file -->
+<link rel="stylesheet" href="/lib/styles/nova-ui.css" />
+
+<style>
+  /* Ensure the Storybook canvas background changes with theme */
+  html,
+  body {
+    background-color: var(--nova-background);
+    color: var(--nova-foreground);
+    /* transition: background-color 0.3s ease, color 0.3s ease; */
+  }
+
+  /* Storybook specific containers */
+  .sb-show-main,
+  .sb-main-padded,
+  .sb-main-centered,
+  #storybook-root,
+  #storybook-docs,
+  .docs-story {
+    background-color: var(--nova-background) !important;
+    color: var(--nova-foreground) !important;
+  }
+
+  /* Override Storybook's default backgrounds */
+  .sb-show-main.sb-main-padded {
+    background-color: var(--nova-background) !important;
+  }
+
+  /* Ensure the preview iframe also gets the background */
+  #storybook-preview-iframe {
+    background-color: var(--nova-background) !important;
+  }
+</style>

@@ -2,9 +2,63 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-nova-ui": {
+      "projectType": "library",
+      "root": "projects/ngx-nova-ui",
+      "sourceRoot": "projects/ngx-nova-ui/src",
+      "prefix": "nova",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-nova-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-nova-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-nova-ui/tsconfig.spec.json"
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ngx-nova-ui/.storybook",
+            "browserTarget": "ngx-nova-ui:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ngx-nova-ui/.storybook",
+            "browserTarget": "ngx-nova-ui:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
+            "outputDir": "storybook-static"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ngx-nova-ui/**/*.ts", "projects/ngx-nova-ui/**/*.html"],
+            "eslintConfig": "projects/ngx-nova-ui/eslint.config.js"
+          }
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,31 @@
+# Build outputs
+dist/
+storybook-static/
+
+# Dependencies
+node_modules/
+
+# Documentation
+projects/ngx-nova-ui/documentation.json
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Angular specific
+.angular/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Generated files
+*.min.js
+*.min.css

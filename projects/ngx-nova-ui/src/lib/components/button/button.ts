@@ -11,7 +11,7 @@ export type ButtonSize = 'small' | 'medium' | 'large';
     '[class.nova-button-host--full-width]': 'fullWidth()',
   },
   templateUrl: './button.html',
-  styleUrls: ['./button.scss'],
+  styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovaButton {

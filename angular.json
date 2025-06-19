@@ -38,7 +38,8 @@
             "browserTarget": "ngx-nova-ui:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
-            "port": 6006
+            "port": 6006,
+            "styles": ["projects/ngx-nova-ui/src/lib/styles/nova-ui.css"]
           }
         },
         "build-storybook": {
@@ -48,7 +49,8 @@
             "browserTarget": "ngx-nova-ui:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
-            "outputDir": "storybook-static"
+            "outputDir": "storybook-static",
+            "styles": ["projects/ngx-nova-ui/src/lib/styles/nova-ui.css"]
           }
         },
         "lint": {

@@ -25,7 +25,7 @@ npm install ngx-nova-ui
 1. Import the CSS in your `styles.css`:
 
 ```css
-@import 'ngx-nova-ui/styles/nova-ui.css';
+@import 'ngx-nova-ui/src/lib/styles/nova-ui.css';
 ```
 
 2. Import components as needed:

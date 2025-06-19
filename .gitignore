@@ -43,3 +43,6 @@ Thumbs.db
 
 *storybook.log
 storybook-static
+
+# Project-specific files
+CLAUDE.md

@@ -1,64 +1,232 @@
-# NgxNovaUi
+# ngx-nova-ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+A modern Angular 20 UI component library built with the standalone API and Angular signals.
 
-## Code scaffolding
+- Components: NovaButton
+- Services: NovaThemeService
+- Styles: CSS variables and a reset/theme file for light/dark modes
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Installation
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Install the library and its peer dependencies (Angular 20+):
 
 ```bash
-ng generate --help
+npm install ngx-nova-ui
 ```
 
-## Building
+## Global styles (required)
 
-To build the library, run:
+Import the library CSS once in your application global styles (e.g. `src/styles.css`):
+
+```css
+@import 'ngx-nova-ui/styles/nova-ui.css';
+```
+
+This provides the CSS reset and all theming variables used by components.
+
+## Quick start
+
+Use standalone imports to add components to a feature or page component:
+
+```ts
+import { Component } from '@angular/core';
+import { NovaButton } from 'ngx-nova-ui';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [NovaButton],
+  template: ` <nova-button variant="primary" (clicked)="onClick()">Get started</nova-button> `,
+})
+export class HomeComponent {
+  onClick() {
+    // ...
+  }
+}
+```
+
+## Public API
+
+From `ngx-nova-ui` you can import:
+
+- Components: `NovaButton`
+- Services: `NovaThemeService`
+- Types: `ButtonVariant`, `ButtonSize`, `ThemeMode`
+
+```ts
+import { NovaButton, NovaThemeService, type ButtonVariant, type ButtonSize, type ThemeMode } from 'ngx-nova-ui';
+```
+
+---
+
+## Components
+
+### NovaButton
+
+- Selector: `nova-button`
+- Standalone: `true` (import directly into components)
+
+Inputs
+
+- `variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'outline' | 'link'` (default: `primary`)
+- `size: 'small' | 'medium' | 'large'` (default: `medium`)
+- `disabled: boolean` (default: `false`)
+- `fullWidth: boolean` (default: `false`)
+- `type: 'button' | 'submit' | 'reset'` (default: `button`)
+
+Outputs
+
+- `clicked: Event<MouseEvent>` — fires when the button is clicked and not disabled
+
+Examples
+
+```html
+<nova-button>Default</nova-button>
+
+<nova-button variant="secondary">Secondary</nova-button>
+<nova-button variant="danger">Delete</nova-button>
+<nova-button variant="ghost">Ghost</nova-button>
+<nova-button variant="outline">Outline</nova-button>
+<nova-button variant="link">Link</nova-button>
+
+<nova-button size="small">Small</nova-button>
+<nova-button size="large">Large</nova-button>
+
+<nova-button [disabled]="true">Disabled</nova-button>
+
+<div style="width: 100%">
+  <nova-button [fullWidth]="true">Full width</nova-button>
+  <!-- Use type="submit" inside forms -->
+  <form>
+    <nova-button type="submit">Submit</nova-button>
+  </form>
+  <!-- Subscribe to the custom clicked output -->
+  <nova-button (clicked)="onClicked($event)">Click me</nova-button>
+  <!-- Or bind (clicked) on a host component method -->
+  <nova-button (clicked)="handleClick($event)">Action</nova-button>
+
+  <!-- Content projection supports icons/text -->
+  <nova-button>
+    <svg aria-hidden="true"><!-- icon --></svg>
+    Save
+  </nova-button>
+
+  <!-- Link style renders as a text link -->
+  <nova-button variant="link">Learn more</nova-button>
+
+  <!-- Compose classes via CSS variables only; component manages classes itself -->
+  <nova-button class="my-extra-class">Custom</nova-button>
+</div>
+```
+
+Accessibility
+
+- Keyboard focus uses `:focus-visible` and `--nova-ring` for outlines.
+- `disabled` prevents focus and click handling.
+
+---
+
+## Services
+
+### NovaThemeService
+
+Signal-based theming service that manages light/dark/system mode. Provided in root.
+
+Types
+
+- `ThemeMode = 'light' | 'dark' | 'system'`
+
+API
+
+- `currentMode: Signal<ThemeMode>` — readonly signal of the selected mode
+- `isDarkMode: Signal<boolean>` — readonly signal indicating if dark is active
+- `setMode(mode: ThemeMode): void` — set explicit mode
+- `toggleMode(): void` — toggles light/dark; if `system`, flips based on current system preference
+
+Behavior
+
+- Applies or removes the `dark` class on `document.documentElement`.
+- Adds a temporary `nova-theme-transition` class for smooth transitions.
+- Listens to `prefers-color-scheme` changes when in `system` mode.
+
+Usage
+
+```ts
+import { Component, inject } from '@angular/core';
+import { NovaButton, NovaThemeService } from 'ngx-nova-ui';
+
+@Component({
+  selector: 'app-theme-toggle',
+  standalone: true,
+  imports: [NovaButton],
+  template: `
+    <p>Mode: {{ theme.currentMode() }}</p>
+    <p>Dark? {{ theme.isDarkMode() }}</p>
+
+    <div style="display:flex; gap: .5rem; align-items:center; flex-wrap: wrap;">
+      <nova-button (clicked)="theme.setMode('light')">Light</nova-button>
+      <nova-button (clicked)="theme.setMode('dark')">Dark</nova-button>
+      <nova-button (clicked)="theme.setMode('system')">System</nova-button>
+      <nova-button variant="secondary" (clicked)="theme.toggleMode()">Toggle</nova-button>
+    </div>
+  `,
+})
+export class ThemeToggleComponent {
+  readonly theme = inject(NovaThemeService);
+}
+```
+
+SSR
+
+- The service safely guards `document`/`window` access. No extra configuration is needed for Angular SSR.
+
+---
+
+## Theming and customization
+
+All component styles are built on CSS variables. Override them at the `:root` (light) or `.dark` scopes.
+
+Example: tweak primary colors and radius
+
+```css
+:root {
+  --nova-primary: #1447e6;
+  --nova-primary-foreground: #ffffff;
+  --nova-radius-md: 0.5rem;
+}
+
+.dark {
+  --nova-primary: #91c5ff;
+  --nova-primary-foreground: #0a0a0a;
+}
+```
+
+Common tokens used by components include:
+
+- Colors: `--nova-primary`, `--nova-secondary`, `--nova-accent`, `--nova-destructive`, `--nova-foreground`, `--nova-background`
+- Typography: `--nova-text-sm|base|lg`, `--nova-font-medium`
+- Sizing: `--nova-spacing-*`
+- Radius: `--nova-radius-sm|md|lg|xl|full`
+- Ring: `--nova-ring`
+
+---
+
+## Building the library
 
 ```bash
-ng build ngx-nova-ui
+npm run build
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+Artifacts output to `dist/ngx-nova-ui`.
 
-### Publishing the Library
+## Storybook
 
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/ngx-nova-ui
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run component demos locally:
 
 ```bash
-ng test
+npm run storybook
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT

@@ -11,7 +11,7 @@ const preview: Preview = {
     backgrounds: {
       disable: true,
     },
-    layout: 'centered',
+    layout: 'padded',
   },
   globalTypes: {
     theme: {
@@ -33,18 +33,11 @@ const preview: Preview = {
     ((story, context) => {
       const { theme } = context.globals;
       const root = document.documentElement;
-
       const isDark =
         theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
       root.classList.toggle('dark', isDark);
-
       return story();
     }) as Decorator,
-    ((story) => ({
-      ...story(),
-      template: `<div style="padding: 1rem">${story().template || story()}</div>`,
-    })) as Decorator,
   ],
 };
 

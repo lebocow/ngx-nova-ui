@@ -5,6 +5,5 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*.stories.*", "./preview.ts"],
-  "files": ["./typings.d.ts"]
+  "include": ["../src/**/*.stories.*", "./preview.ts"]
 }

@@ -5,5 +5,6 @@
     "entryFile": "src/public-api.ts",
     "cssUrl": "inline"
   },
+  "assets": ["src/lib/styles/nova-ui.css"],
   "allowedNonPeerDependencies": ["tslib"]
 }

@@ -1,0 +1,198 @@
+---
+description: Git workflow, commit conventions, and collaboration guidelines
+---
+
+# Git Workflow & Commit Guidelines
+
+## Conventional Commits
+
+Use Conventional Commits format for all commit messages:
+
+```
+<type>: <subject>
+
+- <change description 1>
+- <change description 2>
+- ...
+```
+
+## Commit Types
+
+- **feat**: New feature or component
+- **fix**: Bug fix
+- **docs**: Documentation changes (README, API docs)
+- **style**: Code style changes (formatting, linting)
+- **refactor**: Code refactoring without changing functionality
+- **test**: Adding or updating tests
+- **chore**: Maintenance tasks, dependency updates, build changes
+- **perf**: Performance improvements
+- **ci**: CI/CD pipeline changes
+
+## Commit Message Examples
+
+```bash
+# Feature
+feat: add nova-input component
+
+- Implement text input with validation support
+- Add size variants (small, medium, large)
+- Include Storybook stories for all variants
+- Add unit tests with 85% coverage
+
+# Bug fix
+fix: resolve button disabled state styling
+
+- Fix disabled button opacity not applying correctly
+- Update CSS variable for disabled state
+- Add test case for disabled styling
+
+# Documentation
+docs: update component usage examples
+
+- Add comprehensive usage examples for nova-button
+- Update API documentation with new props
+- Include accessibility guidelines
+
+# Refactoring
+refactor: optimize button component performance
+
+- Use computed() for class calculations
+- Remove unnecessary change detection cycles
+- Improve template rendering performance
+```
+
+## Branch Naming Convention
+
+- **Feature**: `feature/<component-name>` (e.g., `feature/nova-input`)
+- **Bug Fix**: `fix/<issue-description>` (e.g., `fix/button-disabled-styling`)
+- **Documentation**: `docs/<topic>` (e.g., `docs/api-examples`)
+- **Refactoring**: `refactor/<component>` (e.g., `refactor/button-performance`)
+
+## Pull Request Guidelines
+
+### PR Requirements
+
+- **Linked Issues**: Describe change and rationale, link to issues
+- **Clear Description**: Explain what changed and why
+- **Screenshots**: Include for UI changes
+- **Documentation**: Update README/public API when needed
+- **Quality Gates**: Pass lint, format, and test checks
+
+### PR Checklist
+
+- [ ] Linked issue(s) and clear description
+- [ ] Lint/format/tests pass locally (`npm run lint`, `npm run format:check`, `npm test`)
+- [ ] Unit tests added/updated and coverage maintained (≥80%)
+- [ ] Storybook stories added/updated (for UI changes)
+- [ ] Screenshots or recordings (for visual changes)
+- [ ] Documentation updated (README/public API/usage examples)
+- [ ] Breaking changes documented (if any)
+
+### Example PR Checklist
+
+- [ ] Linked issue(s) and clear description
+- [ ] Lint/format/tests pass locally
+- [ ] Unit tests added/updated and coverage maintained (≥80%)
+- [ ] Storybook stories added/updated (UI changes)
+- [ ] Screenshots or recordings (visual changes)
+- [ ] Docs updated (README/public API/usage)
+
+### PR Template
+
+```markdown
+## Description
+
+Brief description of changes and rationale.
+
+## Type of Change
+
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Documentation update
+
+## Testing
+
+- [ ] Unit tests pass
+- [ ] Storybook stories updated
+- [ ] Manual testing completed
+
+## Screenshots (if applicable)
+
+Add screenshots for UI changes.
+
+## Checklist
+
+- [ ] Code follows project style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] No breaking changes (or documented)
+```
+
+## Git Hooks Configuration
+
+Reference: [package.json](mdc:package.json) lint-staged section
+
+### Pre-commit Hooks
+
+- **TypeScript**: ESLint + Prettier on `*.ts` files
+- **Templates**: Prettier on `*.html` files
+- **Styles**: Prettier on `*.scss`, `*.css` files
+- **Documentation**: Prettier on `*.json`, `*.md` files
+
+### Husky Integration
+
+Reference: [package.json](mdc:package.json) prepare script
+
+- **Husky**: Git hooks management
+- **Lint-staged**: Run linters on staged files only
+- **Pre-commit**: Automatic formatting and linting
+
+## Collaboration Guidelines
+
+### Code Review Process
+
+1. **Self Review**: Review your own code before requesting review
+2. **Small PRs**: Keep pull requests focused and small
+3. **Clear Communication**: Explain complex changes in PR description
+4. **Responsive**: Respond to review feedback promptly
+5. **Learning**: Use reviews as learning opportunities
+
+### Review Checklist
+
+- [ ] Code follows Angular 20 patterns and best practices
+- [ ] Signal-based inputs/outputs used correctly
+- [ ] OnPush change detection strategy applied
+- [ ] Native control flow used in templates
+- [ ] Tests cover new functionality
+- [ ] Documentation updated appropriately
+- [ ] No breaking changes without documentation
+
+## Release Management
+
+### Version Bumping
+
+```bash
+# Update version in projects/ngx-nova-ui/package.json
+npm version patch|minor|major
+
+# Commit and tag
+git add .
+git commit -m "chore: bump version to x.x.x"
+git tag vx.x.x
+git push origin main --tags
+```
+
+### Release Notes
+
+- **Changelog**: Document all changes in CHANGELOG.md
+- **Breaking Changes**: Clearly mark breaking changes
+- **Migration Guide**: Provide migration instructions for breaking changes
+- **Feature Highlights**: Highlight new features and improvements
+
+## Important Notes
+
+- **NO Attribution**: Do NOT include "Generated by Claude", "Co-authored by Claude", or similar attribution in commit messages
+- **Clean History**: Keep commit history clean and meaningful
+- **Atomic Commits**: Make commits atomic (one logical change per commit)
+- **Descriptive Messages**: Write clear, descriptive commit messages

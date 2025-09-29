@@ -1,0 +1,141 @@
+---
+globs: projects/ngx-nova-ui/src/lib/components/**/*.ts,projects/ngx-nova-ui/src/lib/components/**/*.html,projects/ngx-nova-ui/src/lib/components/**/*.scss
+description: Component development guidelines and patterns for ngx-nova-ui library
+---
+
+# Component Development Guidelines
+
+## Component Structure
+
+Each component must follow this exact structure:
+
+```
+components/<name>/
+├── <name>.ts          # Component implementation
+├── <name>.html        # Template (if external)
+├── <name>.scss        # Component styles
+├── <name>.stories.ts  # Storybook stories
+└── index.ts           # Public exports
+```
+
+## Component Implementation Requirements
+
+### File Naming
+
+- Use Angular 20 naming: `button.ts` not `button.component.ts`
+- Template: `button.html` (if external)
+- Styles: `button.scss`
+- Stories: `button.stories.ts`
+- Index: `index.ts` for exports
+
+### Component Class Structure
+
+```typescript
+import { ChangeDetectionStrategy, Component, input, output, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'nova-<component-name>',
+  imports: [CommonModule],
+  templateUrl: './<name>.html',
+  styleUrl: './<name>.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class Nova<ComponentName> {
+  // Signal-based inputs (required)
+  readonly <property> = input<Type>(defaultValue);
+
+  // Signal-based outputs (required)
+  readonly <event> = output<EventType>();
+
+  // Computed properties for derived state
+  protected readonly <computedProperty> = computed(() => {
+    // Implementation
+  });
+
+  // Protected methods for template use
+  protected handle<Action>(event: EventType): void {
+    // Implementation
+  }
+}
+```
+
+## Selector Naming Convention
+
+- **Element Selectors**: `nova-<kebab-case>` (e.g., `nova-button`, `nova-input`)
+- **Directive Selectors**: `nova<camelCase>` (e.g., `novaTooltip`, `novaValidator`)
+
+## Input/Output Patterns
+
+- **Inputs**: Use `input()` function with explicit types and default values
+- **Outputs**: Use `output()` function with explicit event types
+- **Computed**: Use `computed()` for derived state from inputs
+- **Protected**: Use `protected` for template-only methods/properties
+
+## Template Guidelines
+
+- **Inline Templates**: Prefer inline templates for small components
+- **External Templates**: Use external templates for complex layouts
+- **Native Control Flow**: Use `@if`, `@for`, `@switch` instead of structural directives
+- **Track Functions**: Always provide track functions: `@for (item of items; track item.id)`
+
+## Styling Guidelines
+
+- **CSS Classes**: Use `nova-<component>` prefix for component classes
+- **BEM Methodology**: Use BEM-like naming: `nova-button--primary`, `nova-button--large`
+- **CSS Variables**: Use `--nova-` prefix for component-specific variables
+- **Scoped Styles**: Keep styles scoped to component
+
+## Storybook Integration
+
+Every component must include Storybook stories:
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/angular';
+import { Nova<ComponentName> } from './<name>';
+
+const meta: Meta<Nova<ComponentName>> = {
+  title: 'Components/<ComponentName>',
+  component: Nova<ComponentName>,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Component description'
+      }
+    }
+  }
+};
+
+export default meta;
+type Story = StoryObj<Nova<ComponentName>>;
+
+export const Default: Story = {
+  args: {
+    // Default props
+  }
+};
+```
+
+## Public API Export
+
+Each component must be exported in its `index.ts`:
+
+```typescript
+export * from './<name>';
+```
+
+And added to the main public API: [projects/ngx-nova-ui/src/public-api.ts](mdc:projects/ngx-nova-ui/src/public-api.ts)
+
+## Accessibility Requirements
+
+- **ARIA Attributes**: Include appropriate ARIA attributes
+- **Keyboard Navigation**: Ensure keyboard accessibility
+- **Screen Reader Support**: Test with screen readers
+- **Focus Management**: Implement proper focus management
+
+## Performance Considerations
+
+- **OnPush Strategy**: Always use `ChangeDetectionStrategy.OnPush`
+- **Computed Properties**: Use `computed()` for expensive derived state
+- **Lazy Loading**: Consider lazy loading for heavy components
+- **Tree Shaking**: Ensure components are tree-shakable

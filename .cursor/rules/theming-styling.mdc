@@ -1,0 +1,205 @@
+---
+globs: *.scss,*.css,projects/ngx-nova-ui/src/lib/styles/**
+description: Theming system and styling guidelines for ngx-nova-ui library
+---
+
+# Theming & Styling Guidelines
+
+## CSS-First Theming Approach
+
+The library uses CSS custom properties (variables) for theming, similar to shadcn/ui approach.
+
+## Theme System Architecture
+
+### Global Theme Variables
+
+Reference: [projects/ngx-nova-ui/src/lib/styles/nova-ui.css](mdc:projects/ngx-nova-ui/src/lib/styles/nova-ui.css)
+
+- **CSS Variables**: All theme tokens defined as CSS custom properties
+- **Variable Prefix**: Use `--nova-` prefix for all theme variables
+- **Dark Mode**: Includes `.dark` class with dark mode variables
+
+### Theme Variable Categories
+
+```css
+:root {
+  /* Colors */
+  --nova-primary: hsl(222.2 84% 4.9%);
+  --nova-primary-foreground: hsl(210 40% 98%);
+
+  /* Spacing */
+  --nova-spacing-xs: 0.25rem;
+  --nova-spacing-sm: 0.5rem;
+  --nova-spacing-md: 1rem;
+
+  /* Typography */
+  --nova-font-family: 'Nunito Sans', sans-serif;
+  --nova-font-size-sm: 0.875rem;
+
+  /* Borders */
+  --nova-radius: 0.375rem;
+  --nova-border-width: 1px;
+
+  /* Shadows */
+  --nova-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --nova-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+```
+
+## Component Styling Guidelines
+
+### CSS Class Naming Convention
+
+- **Component Root**: `nova-<component>` (e.g., `nova-button`)
+- **Modifiers**: `nova-<component>--<modifier>` (e.g., `nova-button--primary`)
+- **States**: `nova-<component>--<state>` (e.g., `nova-button--disabled`)
+- **Elements**: `nova-<component>__<element>` (e.g., `nova-button__icon`)
+
+### BEM Methodology
+
+```scss
+.nova-button {
+  // Base styles
+
+  &--primary {
+    // Primary variant
+  }
+
+  &--large {
+    // Large size
+  }
+
+  &--disabled {
+    // Disabled state
+  }
+
+  &__icon {
+    // Button icon element
+  }
+}
+```
+
+### Component-Specific Variables
+
+```scss
+.nova-button {
+  --nova-button-height: var(--nova-spacing-md);
+  --nova-button-padding: var(--nova-spacing-sm) var(--nova-spacing-md);
+  --nova-button-radius: var(--nova-radius);
+
+  // Use variables in styles
+  height: var(--nova-button-height);
+  padding: var(--nova-button-padding);
+  border-radius: var(--nova-button-radius);
+}
+```
+
+## Theme Service Integration
+
+### Theme Service Usage
+
+Reference: [projects/ngx-nova-ui/src/lib/services/theme.service.ts](mdc:projects/ngx-nova-ui/src/lib/services/theme.service.ts)
+
+```typescript
+import { NovaThemeService } from 'ngx-nova-ui';
+
+// Toggle between light/dark/system
+themeService.setMode('dark');
+themeService.toggleMode();
+```
+
+### Dark Mode Implementation
+
+```css
+.dark {
+  --nova-primary: hsl(210 40% 98%);
+  --nova-primary-foreground: hsl(222.2 84% 4.9%);
+  --nova-background: hsl(222.2 84% 4.9%);
+  --nova-foreground: hsl(210 40% 98%);
+}
+```
+
+## User Customization
+
+### CSS Import Requirements
+
+Users must import the CSS file in their application:
+
+```typescript
+// In styles.css or angular.json
+@import 'ngx-nova-ui/styles/nova-ui.css';
+```
+
+### Variable Override Pattern
+
+```css
+:root {
+  /* Override theme variables */
+  --nova-primary: #your-color;
+  --nova-radius: 0.5rem;
+  --nova-font-family: 'Your Font', sans-serif;
+}
+```
+
+## Styling Best Practices
+
+### CSS Architecture
+
+- **Scoped Styles**: Keep component styles scoped to component
+- **Global Styles**: Use global styles only for theme variables
+- **CSS Variables**: Prefer CSS variables over hardcoded values
+- **Responsive Design**: Use CSS Grid and Flexbox for layouts
+
+### Performance Considerations
+
+- **CSS Variables**: Use CSS variables for runtime theme switching
+- **Minimal CSS**: Keep CSS bundle size minimal
+- **Tree Shaking**: Ensure unused styles are tree-shakable
+- **Critical CSS**: Inline critical CSS for above-the-fold content
+
+### Accessibility
+
+- **Color Contrast**: Ensure WCAG AA compliance for color combinations
+- **Focus States**: Provide clear focus indicators
+- **Reduced Motion**: Respect `prefers-reduced-motion` media query
+- **High Contrast**: Support high contrast mode
+
+## Component Style Structure
+
+```scss
+// Component root
+.nova-<component > {
+  // CSS variables for customization
+  --nova-<component>-<property>: var(--nova-<global-property>);
+
+  // Base styles
+  display: inline-block;
+
+  // Variants
+  &--<variant > {
+    // Variant-specific styles
+  }
+
+  // Sizes
+  &--<size > {
+    // Size-specific styles
+  }
+
+  // States
+  &--<state > {
+    // State-specific styles
+  }
+
+  // Elements
+  &__<element > {
+    // Element-specific styles
+  }
+}
+```
+
+## Important Notes
+
+- **DO NOT** modify color values in `nova-ui.css` - they are copied from shadcn/ui and are correct
+- **DO** use CSS variables for all themeable properties
+- **DO** provide fallback values for CSS variables
+- **DO** test theme switching in both light and dark modes

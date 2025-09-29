@@ -1,0 +1,48 @@
+---
+alwaysApply: true
+description: Project structure and organization guidelines for ngx-nova-ui Angular 20 library workspace
+---
+
+# Project Structure & Organization
+
+## Workspace Overview
+
+This is an Angular 20 UI library workspace called `ngx-nova-ui` with signal-based architecture and standalone components.
+
+## Key Directories
+
+- **Library Source**: [projects/ngx-nova-ui/src/](mdc:projects/ngx-nova-ui/src/)
+- **Public API**: [projects/ngx-nova-ui/src/public-api.ts](mdc:projects/ngx-nova-ui/src/public-api.ts) - All public exports
+- **Components**: [projects/ngx-nova-ui/src/lib/components/](mdc:projects/ngx-nova-ui/src/lib/components/) - Component implementations
+- **Services**: [projects/ngx-nova-ui/src/lib/services/](mdc:projects/ngx-nova-ui/src/lib/services/) - Shared services
+- **Styles**: [projects/ngx-nova-ui/src/lib/styles/](mdc:projects/ngx-nova-ui/src/lib/styles/) - Global CSS and theme variables
+- **Storybook**: [projects/ngx-nova-ui/.storybook/](mdc:projects/ngx-nova-ui/.storybook/) - Storybook configuration
+- **Build Output**: [dist/ngx-nova-ui/](mdc:dist/ngx-nova-ui/) - Compiled library
+
+## Component Structure Pattern
+
+Each component follows this structure:
+
+```
+components/<name>/
+├── <name>.ts          # Component implementation
+├── <name>.html        # Template (if external)
+├── <name>.scss        # Component styles
+├── <name>.stories.ts  # Storybook stories
+└── index.ts           # Public exports
+```
+
+## Configuration Files
+
+- **Workspace Config**: [angular.json](mdc:angular.json) - Angular workspace configuration
+- **Library Config**: [projects/ngx-nova-ui/ng-package.json](mdc:projects/ngx-nova-ui/ng-package.json) - Library packaging
+- **TypeScript**: [projects/ngx-nova-ui/tsconfig.lib.json](mdc:projects/ngx-nova-ui/tsconfig.lib.json) - Library TypeScript config
+- **ESLint**: [eslint.config.js](mdc:eslint.config.js) - Code quality rules
+- **Prettier**: [.prettierrc.json](mdc:.prettierrc.json) - Code formatting
+
+## Naming Conventions
+
+- **Selectors**: Element selectors prefixed `nova-` (kebab-case), directive selectors `nova` (camelCase)
+- **Filenames**: Angular 20 style (e.g., `button.ts` not `button.component.ts`)
+- **CSS Classes**: Use `nova-` prefix for component classes
+- **CSS Variables**: Use `--nova-` prefix for theme variables

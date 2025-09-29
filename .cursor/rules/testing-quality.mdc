@@ -1,0 +1,171 @@
+---
+globs: *.spec.ts,*.stories.ts
+description: Testing, quality assurance, and code standards for ngx-nova-ui library
+---
+
+# Testing & Quality Assurance
+
+## Testing Framework
+
+- **Unit Tests**: Jasmine + Karma
+- **Configuration**: [projects/ngx-nova-ui/tsconfig.spec.json](mdc:projects/ngx-nova-ui/tsconfig.spec.json)
+- **Coverage Target**: ≥80% statements/branches overall
+- **Test Location**: Place tests alongside code as `*.spec.ts`
+
+## Unit Testing Guidelines
+
+### Test File Structure
+
+```typescript
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Nova<ComponentName> } from './<name>';
+
+describe('Nova<ComponentName>', () => {
+  let component: Nova<ComponentName>;
+  let fixture: ComponentFixture<Nova<ComponentName>>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [Nova<ComponentName>]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Nova<ComponentName>);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  // Test signal-based inputs
+  it('should handle input changes', () => {
+    component.<inputProperty>.set('new-value');
+    expect(component.<inputProperty>()).toBe('new-value');
+  });
+
+  // Test signal-based outputs
+  it('should emit events', () => {
+    spyOn(component.<outputProperty>, 'emit');
+    component.handle<Action>(mockEvent);
+    expect(component.<outputProperty>.emit).toHaveBeenCalledWith(mockEvent);
+  });
+});
+```
+
+### Testing Patterns
+
+- **Signal Testing**: Test signal inputs/outputs with `.set()` and `.emit()`
+- **Computed Testing**: Test computed properties with different input combinations
+- **Template Testing**: Test template rendering with different input states
+- **Event Testing**: Test event handlers and output emissions
+
+## Storybook Testing
+
+- **Stories Required**: Every component must have Storybook stories
+- **Story Location**: `*.stories.ts` alongside component files
+- **Coverage**: Include all component variants and states
+- **Documentation**: Include component descriptions and usage examples
+
+### Story Structure
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/angular';
+import { Nova<ComponentName> } from './<name>';
+
+const meta: Meta<Nova<ComponentName>> = {
+  title: 'Components/<ComponentName>',
+  component: Nova<ComponentName>,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Component description and usage guidelines'
+      }
+    }
+  },
+  argTypes: {
+    // Define controls for Storybook
+  }
+};
+
+export default meta;
+type Story = StoryObj<Nova<ComponentName>>;
+
+export const Default: Story = {
+  args: {
+    // Default props
+  }
+};
+
+export const AllVariants: Story = {
+  args: {
+    // All variant combinations
+  }
+};
+```
+
+## Code Quality Standards
+
+### ESLint Configuration
+
+Reference: [eslint.config.js](mdc:eslint.config.js)
+
+- **Angular Rules**: Enforced via `angular-eslint`
+- **TypeScript Rules**: Strict type checking enabled
+- **Prettier Integration**: Code formatting enforced
+- **Security Rules**: No eval, no dynamic code execution
+
+### Prettier Configuration
+
+Reference: [.prettierrc.json](mdc:.prettierrc.json)
+
+- **Single Quotes**: Use single quotes for strings
+- **Bracket Same Line**: `bracketSameLine: true`
+- **Print Width**: 120 characters
+- **2 Spaces**: Use 2 spaces for indentation
+
+### Lint-Staged Configuration
+
+Reference: [package.json](mdc:package.json) lint-staged section
+
+- **TypeScript**: ESLint + Prettier on `*.ts` files
+- **Templates**: Prettier on `*.html` files
+- **Styles**: Prettier on `*.scss`, `*.css` files
+- **Documentation**: Prettier on `*.json`, `*.md` files
+
+## Quality Gates
+
+### Pre-commit Checks
+
+- **Linting**: `npm run lint` must pass
+- **Formatting**: `npm run format:check` must pass
+- **Tests**: `npm test` must pass with ≥80% coverage
+
+### Pull Request Requirements
+
+- **Linked Issues**: Describe change and rationale
+- **Screenshots**: Include for UI changes
+- **Documentation**: Update README/public API when needed
+- **Tests**: Add/update tests for new features
+- **Stories**: Add/update Storybook stories for UI changes
+
+## Development Commands
+
+- **Lint**: `npm run lint` | Auto-fix: `npm run lint:fix`
+- **Format**: `npm run format` | Check: `npm run format:check`
+- **Test**: `npm test` (or `ng test ngx-nova-ui --watch=false`)
+- **Storybook**: `npm run storybook` | Build: `npm run build-storybook`
+
+## Testing Framework Details
+
+- **Framework**: Jasmine + Karma
+- **Configuration**: Wired via `tsconfig.spec.json` and Angular builder
+- **Test Location**: Place tests alongside code as `*.spec.ts` (e.g., `button.spec.ts`)
+- **Storybook Stories**: Include for new components; prefer simple, focused unit tests
+
+## Coverage Requirements
+
+- **Overall Target**: ≥80% statements/branches
+- **Changed Code**: Prioritize high coverage on modified code
+- **Critical Paths**: Ensure 100% coverage for core functionality
+- **Edge Cases**: Test error conditions and boundary values

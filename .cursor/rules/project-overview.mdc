@@ -1,0 +1,127 @@
+---
+alwaysApply: true
+description: Comprehensive overview of ngx-nova-ui Angular 20 library workspace
+---
+
+# ngx-nova-ui Project Overview
+
+## Project Summary
+
+This is an Angular 20 UI component library workspace called `ngx-nova-ui` that leverages the latest Angular features including signal-based architecture, standalone components, and modern development practices.
+
+## Key Technologies & Versions
+
+- **Angular**: 20.0.0+ with standalone components
+- **TypeScript**: 5.8.2+ with strict type checking
+- **Testing**: Jasmine + Karma
+- **Storybook**: 9.0.6+ for component development
+- **Build**: ng-packagr for library packaging
+- **Linting**: ESLint + Prettier + angular-eslint
+
+## Architecture Highlights
+
+- **Signal-Based State**: Uses Angular Signals for reactive state management
+- **Standalone Components**: No NgModules, all components are standalone
+- **OnPush Strategy**: All components use `ChangeDetectionStrategy.OnPush`
+- **Modern APIs**: Uses `input()`/`output()` functions over decorators
+- **Native Control Flow**: Uses `@if`, `@for`, `@switch` instead of structural directives
+
+## Project Structure
+
+```
+ngx-nova-ui-workspace/
+├── projects/ngx-nova-ui/          # Main library project
+│   ├── src/lib/components/        # Component implementations
+│   ├── src/lib/services/          # Shared services
+│   ├── src/lib/styles/            # Global CSS and theme variables
+│   ├── src/public-api.ts         # Public API exports
+│   └── .storybook/               # Storybook configuration
+├── dist/ngx-nova-ui/             # Build output
+├── angular.json                  # Workspace configuration
+├── eslint.config.js              # ESLint configuration
+└── .prettierrc.json              # Prettier configuration
+```
+
+## Development Workflow
+
+1. **Development**: Use `npm run watch` for development builds
+2. **Testing**: Use `npm test` for unit tests
+3. **Storybook**: Use `npm run storybook` for component development
+4. **Quality**: Use `npm run lint` and `npm run format:check`
+5. **Build**: Use `npm run build` for production builds
+6. **Publish**: Build then publish from `dist/ngx-nova-ui/`
+
+## Component Development Pattern
+
+Each component follows this structure:
+
+- **Component File**: `button.ts` (Angular 20 naming)
+- **Template**: `button.html` (if external)
+- **Styles**: `button.scss` with BEM methodology
+- **Stories**: `button.stories.ts` for Storybook
+- **Index**: `index.ts` for exports
+
+## Theming System
+
+- **CSS-First**: Uses CSS custom properties for theming
+- **Variable Prefix**: `--nova-` prefix for all theme variables
+- **Dark Mode**: Built-in dark mode support
+- **Customization**: Users can override any CSS variable
+- **Theme Service**: Minimal service for theme switching
+
+## Quality Standards
+
+- **Coverage**: ≥80% test coverage required
+- **Linting**: ESLint with Angular-specific rules
+- **Formatting**: Prettier with 2 spaces, single quotes, 120 cols
+- **Type Safety**: Strict TypeScript configuration
+- **Security**: No eval, no dynamic code execution
+
+## Naming Conventions
+
+- **Selectors**: Element selectors `nova-` (kebab-case), directive selectors `nova` (camelCase)
+- **CSS Classes**: `nova-` prefix for component classes
+- **CSS Variables**: `--nova-` prefix for theme variables
+- **Filenames**: Angular 20 style (`button.ts` not `button.component.ts`)
+
+## Key Files Reference
+
+- **Public API**: [projects/ngx-nova-ui/src/public-api.ts](mdc:projects/ngx-nova-ui/src/public-api.ts)
+- **Theme CSS**: [projects/ngx-nova-ui/src/lib/styles/nova-ui.css](mdc:projects/ngx-nova-ui/src/lib/styles/nova-ui.css)
+- **Button Example**: [projects/ngx-nova-ui/src/lib/components/button/button.ts](mdc:projects/ngx-nova-ui/src/lib/components/button/button.ts)
+- **Workspace Config**: [angular.json](mdc:angular.json)
+- **Package Config**: [projects/ngx-nova-ui/package.json](mdc:projects/ngx-nova-ui/package.json)
+
+## Development Guidelines
+
+- **Signal-Based**: Use signals for all state management
+- **Computed Properties**: Use `computed()` for derived state
+- **Protected Methods**: Use `protected` for template-only methods
+- **Readonly Signals**: Use `readonly` for signal properties
+- **Inject Function**: Use `inject()` over constructor injection
+- **Host Bindings**: Use `host` object instead of decorators
+
+## Testing Strategy
+
+- **Unit Tests**: Jasmine + Karma with ≥80% coverage
+- **Component Testing**: Test signal inputs/outputs and computed properties
+- **Storybook**: Comprehensive stories for all component variants
+- **Accessibility**: Test ARIA attributes and keyboard navigation
+- **Visual Testing**: Screenshots for UI changes
+
+## Publishing Workflow
+
+1. **Build**: `npm run build`
+2. **Test**: `npm test`
+3. **Lint**: `npm run lint`
+4. **Format**: `npm run format:check`
+5. **Publish**: `cd dist/ngx-nova-ui && npm publish`
+
+## Important Notes
+
+- **Angular 20**: Uses latest Angular features and patterns
+- **No NgModules**: All components are standalone
+- **Signal Architecture**: Leverages Angular Signals throughout
+- **CSS Variables**: Theme system based on CSS custom properties
+- **Tree Shaking**: Library is fully tree-shakable
+- **Type Safety**: Strict TypeScript with no `any` types allowed

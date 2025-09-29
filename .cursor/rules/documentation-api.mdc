@@ -1,0 +1,335 @@
+---
+globs: *.md,*.stories.ts,projects/ngx-nova-ui/src/public-api.ts
+description: Documentation standards and API guidelines for ngx-nova-ui library
+---
+
+# Documentation & API Guidelines
+
+## Public API Management
+
+### Public API File
+
+Reference: [projects/ngx-nova-ui/src/public-api.ts](mdc:projects/ngx-nova-ui/src/public-api.ts)
+
+- **Single Source**: All public exports must go through this file
+- **Organized Exports**: Group exports by category (components, services, etc.)
+- **Clean API**: Only export what users need, keep internal APIs private
+
+### Export Organization
+
+```typescript
+/*
+ * Public API Surface of ngx-nova-ui
+ */
+
+// Components
+export * from './lib/components/button';
+export * from './lib/components/input';
+export * from './lib/components/modal';
+
+// Services
+export * from './lib/services';
+
+// Types
+export * from './lib/models';
+
+// Utilities
+export * from './lib/utils';
+```
+
+## Component Documentation
+
+### Storybook Stories
+
+Every component must include comprehensive Storybook stories:
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/angular';
+import { NovaButton } from './button';
+
+const meta: Meta<NovaButton> = {
+  title: 'Components/Button',
+  component: NovaButton,
+  parameters: {
+    docs: {
+      description: {
+        component: `
+# NovaButton
+
+A versatile button component with multiple variants and sizes.
+
+## Usage
+
+\`\`\`html
+<nova-button variant="primary" size="medium">
+  Click me
+</nova-button>
+\`\`\`
+
+## Variants
+
+- **primary**: Primary action button
+- **secondary**: Secondary action button
+- **danger**: Destructive action button
+- **ghost**: Minimal button style
+- **outline**: Outlined button style
+- **link**: Link-style button
+
+## Sizes
+
+- **small**: Compact button for tight spaces
+- **medium**: Standard button size (default)
+- **large**: Prominent button for primary actions
+        `,
+      },
+    },
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],
+      description: 'Button visual variant',
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      description: 'Button size',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the button is disabled',
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<NovaButton>;
+
+export const Default: Story = {
+  args: {
+    variant: 'primary',
+    size: 'medium',
+    disabled: false,
+  },
+};
+
+export const AllVariants: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <nova-button variant="primary">Primary</nova-button>
+        <nova-button variant="secondary">Secondary</nova-button>
+        <nova-button variant="danger">Danger</nova-button>
+        <nova-button variant="ghost">Ghost</nova-button>
+        <nova-button variant="outline">Outline</nova-button>
+        <nova-button variant="link">Link</nova-button>
+      </div>
+    `,
+  }),
+};
+```
+
+## README Documentation
+
+### Package README
+
+Reference: [projects/ngx-nova-ui/README.md](mdc:projects/ngx-nova-ui/README.md)
+Must include:
+
+- **Installation**: How to install the package
+- **Quick Start**: Basic usage example
+- **Components**: List of available components
+- **Theming**: How to customize themes
+- **API Reference**: Link to comprehensive API docs
+- **Contributing**: How to contribute to the project
+
+### Workspace README
+
+Reference: [README.md](mdc:README.md)
+Must include:
+
+- **Project Overview**: What the workspace contains
+- **Development Setup**: How to set up development environment
+- **Available Scripts**: All npm scripts and their purposes
+- **Architecture**: High-level architecture overview
+- **Contributing**: Development workflow and guidelines
+
+## API Documentation Standards
+
+### Component API Documentation
+
+````typescript
+/**
+ * A versatile button component with multiple variants and sizes.
+ *
+ * @example
+ * ```html
+ * <nova-button variant="primary" size="medium" (clicked)="handleClick($event)">
+ *   Click me
+ * </nova-button>
+ * ```
+ */
+@Component({
+  selector: 'nova-button',
+  // ...
+})
+export class NovaButton {
+  /**
+   * Button visual variant
+   * @default 'primary'
+   */
+  readonly variant = input<ButtonVariant>('primary');
+
+  /**
+   * Button size
+   * @default 'medium'
+   */
+  readonly size = input<ButtonSize>('medium');
+
+  /**
+   * Whether the button is disabled
+   * @default false
+   */
+  readonly disabled = input(false);
+
+  /**
+   * Emitted when the button is clicked
+   */
+  readonly clicked = output<MouseEvent>();
+}
+````
+
+### Type Documentation
+
+```typescript
+/**
+ * Available button variants
+ */
+export type ButtonVariant =
+  | 'primary' /** Primary action button */
+  | 'secondary' /** Secondary action button */
+  | 'danger' /** Destructive action button */
+  | 'ghost' /** Minimal button style */
+  | 'outline' /** Outlined button style */
+  | 'link'; /** Link-style button */
+
+/**
+ * Available button sizes
+ */
+export type ButtonSize =
+  | 'small' /** Compact button for tight spaces */
+  | 'medium' /** Standard button size */
+  | 'large'; /** Prominent button for primary actions */
+```
+
+## Usage Examples
+
+### Basic Usage
+
+```typescript
+import { NovaButton } from 'ngx-nova-ui';
+
+@Component({
+  template: `
+    <nova-button variant="primary" size="large" (clicked)="handleClick($event)"> Save Changes </nova-button>
+  `,
+})
+export class MyComponent {
+  handleClick(event: MouseEvent) {
+    console.log('Button clicked', event);
+  }
+}
+```
+
+### Advanced Usage
+
+```typescript
+import { NovaButton, NovaInput } from 'ngx-nova-ui';
+
+@Component({
+  template: `
+    <nova-input [(ngModel)]="email" placeholder="Enter email" type="email"> </nova-input>
+
+    <nova-button variant="primary" [disabled]="!email" (clicked)="submitForm()"> Submit </nova-button>
+  `,
+})
+export class FormComponent {
+  email = '';
+
+  submitForm() {
+    // Handle form submission
+  }
+}
+```
+
+## Documentation Maintenance
+
+### Keeping Docs Updated
+
+- **API Changes**: Update documentation when APIs change
+- **Examples**: Keep usage examples current and working
+- **Storybook**: Ensure Storybook stories reflect current component behavior
+- **README**: Update README when adding new features or changing setup
+
+### Documentation Review
+
+- **Accuracy**: Verify all examples work correctly
+- **Completeness**: Ensure all public APIs are documented
+- **Clarity**: Write clear, concise documentation
+- **Consistency**: Maintain consistent documentation style
+
+## Accessibility Documentation
+
+### Component Accessibility
+
+Document accessibility features for each component:
+
+- **ARIA Support**: Which ARIA attributes are supported
+- **Keyboard Navigation**: How to navigate with keyboard
+- **Screen Reader**: Screen reader compatibility
+- **Focus Management**: How focus is handled
+
+### Usage Guidelines
+
+```markdown
+## Accessibility
+
+This component supports the following accessibility features:
+
+- **ARIA**: Supports `aria-label`, `aria-describedby`, and `aria-expanded`
+- **Keyboard**: Fully keyboard navigable with Tab, Enter, and Space keys
+- **Screen Reader**: Announces button state and label to screen readers
+- **Focus**: Visible focus indicator with customizable styling
+```
+
+## Migration Guides
+
+### Breaking Changes
+
+When making breaking changes, provide migration guides:
+
+````markdown
+## Migration Guide
+
+### From v1.x to v2.x
+
+#### Button Component Changes
+
+**Before:**
+
+```html
+<nova-button [variant]="'primary'" [size]="'medium'"></nova-button>
+```
+````
+
+**After:**
+
+```html
+<nova-button variant="primary" size="medium"></nova-button>
+```
+
+The `variant` and `size` inputs are now required and use string literals instead of property binding.
+
+```
+
+```

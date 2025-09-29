@@ -1,0 +1,105 @@
+---
+globs: *.ts,*.html
+description: Angular 20 patterns, best practices, and modern architecture guidelines
+---
+
+# Angular 20 Patterns & Best Practices
+
+## Core Architecture Principles
+
+- **Standalone Components**: Always use standalone components (no NgModules)
+- **Signal-Based State**: Use Angular Signals for reactive state management
+- **OnPush Change Detection**: Always set `ChangeDetectionStrategy.OnPush` for performance
+- **Modern APIs**: Use `input()`/`output()` functions over `@Input()`/`@Output()` decorators
+
+## Component Pattern Example
+
+Reference the button component implementation: [projects/ngx-nova-ui/src/lib/components/button/button.ts](mdc:projects/ngx-nova-ui/src/lib/components/button/button.ts)
+
+```typescript
+import { ChangeDetectionStrategy, Component, input, output, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'nova-button',
+  imports: [CommonModule],
+  templateUrl: './button.html',
+  styleUrl: './button.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class NovaButton {
+  // Signal-based inputs
+  readonly variant = input<ButtonVariant>('primary');
+  readonly size = input<ButtonSize>('medium');
+  readonly disabled = input(false);
+
+  // Signal-based outputs
+  readonly clicked = output<MouseEvent>();
+
+  // Computed properties for derived state
+  protected readonly buttonClasses = computed(() => {
+    // Implementation
+  });
+}
+```
+
+## Template Best Practices
+
+- **Native Control Flow**: Use `@if`, `@for`, `@switch` instead of `*ngIf`, `*ngFor`
+- **Native Bindings**: Use `[class.active]="isActive"` instead of `[ngClass]`
+- **Native Styles**: Use `[style.opacity]="opacity"` instead of `[ngStyle]`
+- **Track Functions**: Always use track functions in `@for` loops: `@for (item of items; track item.id)`
+
+## State Management
+
+- **Signals**: Use signals for local component state
+- **Computed**: Use `computed()` for derived state from other signals
+- **Pure Functions**: Ensure state transformations are pure functions
+- **Observables**: Use `async` pipe for observables in templates
+
+## Service Patterns
+
+- **Dependency Injection**: Use `inject()` function instead of constructor injection
+- **Singleton Services**: Use `providedIn: 'root'` for tree-shakable singletons
+- **Single Responsibility**: Design services with single responsibility principle
+
+## TypeScript Guidelines
+
+- **Strict Types**: Use strict type checking, prefer inference when obvious
+- **Avoid Any**: Use `unknown` instead of `any` when type is uncertain
+- **Explicit Returns**: Use explicit return types for functions
+- **Protected Properties**: Use `protected` for template-only methods/properties
+- **Readonly Signals**: Use `readonly` for signal properties
+
+## Host Bindings
+
+- **Host Object**: Define host bindings in the `host` object instead of `@HostBinding`/`@HostListener`
+- **Class Bindings**: Use `[class.nova-button-host--full-width]` pattern for host classes
+
+## Performance Optimizations
+
+- **OnPush Strategy**: Always use `ChangeDetectionStrategy.OnPush`
+- **Computed Properties**: Use `computed()` for expensive derived state
+- **Track Functions**: Always provide track functions for `@for` loops
+- **Lazy Loading**: Implement lazy-loaded feature routes where applicable
+
+## Component Best Practices
+
+- **Keep Components Small**: Single responsibility principle
+- **Inline Templates**: Prefer inline templates for small components
+- **Reactive Forms**: Prefer Reactive Forms over Template-driven forms
+- **Native Bindings**: Use `[class.active]="isActive"` instead of `[ngClass]`
+- **Native Styles**: Use `[style.opacity]="opacity"` instead of `[ngStyle]`
+- **NgOptimizedImage**: Use for static images (not for inline base64)
+
+## Service Best Practices
+
+- **Single Responsibility**: Design services with single responsibility principle
+- **Singleton Services**: Use `providedIn: 'root'` for tree-shakable singletons
+- **Dependency Injection**: Use `inject()` function instead of constructor injection
+
+## State Management Best Practices
+
+- **Signals**: Use signals for local state; `computed()` for derived state
+- **Pure Functions**: Keep transformations pure; avoid `mutate`; use `set`/`update`
+- **Observables**: Use `async` pipe to handle observables in templates

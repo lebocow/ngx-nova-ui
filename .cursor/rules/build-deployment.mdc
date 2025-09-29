@@ -1,0 +1,169 @@
+---
+description: Build, deployment, and publishing workflows for ngx-nova-ui library
+---
+
+# Build & Deployment Workflows
+
+## Development Commands
+
+### Package Management
+
+- **Install Dependencies**: `npm ci` (use ci for consistent installs)
+- **Add Dependencies**: `npm install <package>` (for workspace dependencies)
+
+### Building the Library
+
+- **Production Build**: `npm run build` (equivalent: `ng build ngx-nova-ui`)
+- **Development Build**: `npm run watch` (watch mode for development)
+- **Build All**: `npm run build:all` (builds entire workspace)
+
+### Development Workflow
+
+- **Watch Mode**: `npm run watch` - Builds library in development mode with file watching
+- **Storybook**: `npm run storybook` - Starts Storybook development server
+- **Build Storybook**: `npm run build-storybook` - Creates static Storybook build
+
+### Quality & Linting Commands
+
+- **Lint**: `npm run lint` | Auto-fix: `npm run lint:fix`
+- **Format**: `npm run format` | Check: `npm run format:check`
+- **Unit Tests**: `npm test` (or `ng test ngx-nova-ui --watch=false`)
+
+## Library Configuration
+
+### Angular Workspace
+
+Reference: [angular.json](mdc:angular.json)
+
+- **Library Project**: `ngx-nova-ui` configured as library
+- **Build Target**: Uses `@angular-devkit/build-angular:ng-packagr`
+- **Output Path**: `dist/ngx-nova-ui/`
+
+### Library Packaging
+
+Reference: [projects/ngx-nova-ui/ng-package.json](mdc:projects/ngx-nova-ui/ng-package.json)
+
+- **Package Format**: ESM2022, FESM2022, UMD
+- **Entry Point**: `projects/ngx-nova-ui/src/public-api.ts`
+- **Side Effects**: `false` for tree-shaking
+
+### TypeScript Configuration
+
+- **Library Build**: [projects/ngx-nova-ui/tsconfig.lib.json](mdc:projects/ngx-nova-ui/tsconfig.lib.json)
+- **Production Build**: [projects/ngx-nova-ui/tsconfig.lib.prod.json](mdc:projects/ngx-nova-ui/tsconfig.lib.prod.json)
+- **Test Configuration**: [projects/ngx-nova-ui/tsconfig.spec.json](mdc:projects/ngx-nova-ui/tsconfig.spec.json)
+
+## Publishing Workflow
+
+### Pre-Publishing Checklist
+
+1. **Build Library**: `npm run build`
+2. **Run Tests**: `npm test`
+3. **Lint Check**: `npm run lint`
+4. **Format Check**: `npm run format:check`
+5. **Storybook Build**: `npm run build-storybook` (optional)
+
+### Publishing Steps
+
+```bash
+# 1. Build the library
+npm run build
+
+# 2. Navigate to dist folder
+cd dist/ngx-nova-ui
+
+# 3. Publish to npm
+npm publish
+```
+
+### Package Configuration
+
+Reference: [projects/ngx-nova-ui/package.json](mdc:projects/ngx-nova-ui/package.json)
+
+- **Name**: `ngx-nova-ui`
+- **Version**: Semantic versioning (major.minor.patch)
+- **Peer Dependencies**: Angular 20+ (`@angular/common`, `@angular/core`)
+- **Side Effects**: `false` for optimal tree-shaking
+
+## Build Output Structure
+
+```
+dist/ngx-nova-ui/
+├── fesm2022/           # ES2022 modules
+│   ├── ngx-nova-ui.mjs
+│   └── ngx-nova-ui.mjs.map
+├── index.d.ts          # TypeScript definitions
+├── package.json        # Package metadata
+└── README.md           # Package documentation
+```
+
+## Version Management
+
+### Semantic Versioning
+
+- **Major**: Breaking changes to public API
+- **Minor**: New features, backward compatible
+- **Patch**: Bug fixes, backward compatible
+
+### Version Bumping
+
+```bash
+# Update version in projects/ngx-nova-ui/package.json
+npm version patch|minor|major
+
+# Commit and tag
+git add .
+git commit -m "chore: bump version to x.x.x"
+git tag vx.x.x
+git push origin main --tags
+```
+
+## Quality Gates
+
+### Pre-Build Validation
+
+- **Linting**: All files must pass ESLint rules
+- **Formatting**: All files must be Prettier formatted
+- **Type Checking**: TypeScript compilation must succeed
+- **Tests**: Unit tests must pass with ≥80% coverage
+
+### Build Validation
+
+- **Library Compilation**: Must compile without errors
+- **Type Definitions**: Must generate complete `.d.ts` files
+- **Bundle Size**: Monitor bundle size for performance
+- **Tree Shaking**: Ensure library is tree-shakable
+
+## Deployment Environments
+
+### Development
+
+- **Local Development**: Use `npm run watch` for development
+- **Storybook**: Use `npm run storybook` for component development
+- **Testing**: Use `npm test` for continuous testing
+
+### Staging
+
+- **Build**: `npm run build`
+- **Storybook**: `npm run build-storybook`
+- **Deploy**: Deploy static Storybook to staging environment
+
+### Production
+
+- **Build**: `npm run build` (production configuration)
+- **Publish**: Publish to npm registry
+- **Documentation**: Update package README and documentation
+
+## Security Considerations
+
+- **No Secrets**: Never commit API keys or tokens
+- **Dependencies**: Regularly audit dependencies for vulnerabilities
+- **Build Security**: Use `npm ci` for consistent, secure installs
+- **Publishing**: Verify package contents before publishing
+- **Code Security**: Avoid `eval`/dynamic code (ESLint enforces this)
+
+## Configuration Tips
+
+- **Publishing**: Build first, then publish from `dist/ngx-nova-ui/` (`npm publish`)
+- **Dependencies**: Use `npm ci` for consistent installs
+- **Environment**: Ensure all development commands work locally before pushing

@@ -2,9 +2,10 @@
 /* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "extends": "../../tsconfig.json",
+  "files": ["src/test.ts"],
+  "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jasmine"]
-  },
-  "include": ["src/**/*.ts"]
+    "types": ["jasmine", "node"]
+  }
 }

@@ -54,7 +54,7 @@ export const Default: Story = {
         [size]="size"
         [disabled]="disabled"
         [fullWidth]="fullWidth"
-        (clicked)="onClick($event)">
+        (click)="onClick($event)">
         Button
       </button>
     `,

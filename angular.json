@@ -28,6 +28,8 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "main": "projects/ngx-nova-ui/src/test.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/ngx-nova-ui/tsconfig.spec.json"
           }
         },

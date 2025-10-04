@@ -48,7 +48,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (clicked)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (click)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
             },
             {
                 "name": "DirectiveFlexibility",
@@ -156,7 +156,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (clicked)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (click)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "DirectiveFlexibility",
@@ -230,7 +230,11 @@
             ]
         }
     },
-    "routes": [],
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "children": []
+    },
     "coverage": {
         "count": 0,
         "status": "low",

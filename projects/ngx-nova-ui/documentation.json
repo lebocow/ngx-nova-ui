@@ -14,7 +14,7 @@
                 "name": "AllSizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -24,7 +24,7 @@
                 "name": "AllVariants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -34,7 +34,7 @@
                 "name": "AllVariantsAndSizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -44,7 +44,7 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -54,7 +54,7 @@
                 "name": "DirectiveFlexibility",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -64,7 +64,7 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -74,7 +74,7 @@
                 "name": "FullWidth",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -84,11 +84,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<NovaButtonDirective>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
+                "defaultValue": "{\n  title: 'Directives/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
             },
             {
                 "name": "preview",
@@ -98,7 +98,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
+                "defaultValue": "{\n  parameters: {\n    a11y: {\n      disable: false,\n    },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
             }
         ],
         "functions": [],
@@ -108,7 +108,7 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<NovaButtonDirective>",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -117,12 +117,12 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts": [
+            "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts": [
                 {
                     "name": "AllSizes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -132,7 +132,7 @@
                     "name": "AllVariants",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -142,7 +142,7 @@
                     "name": "AllVariantsAndSizes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -152,7 +152,7 @@
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -162,7 +162,7 @@
                     "name": "DirectiveFlexibility",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -172,7 +172,7 @@
                     "name": "Disabled",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -182,7 +182,7 @@
                     "name": "FullWidth",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -192,11 +192,11 @@
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<NovaButtonDirective>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
+                    "defaultValue": "{\n  title: 'Directives/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
                 }
             ],
             "projects/ngx-nova-ui/.storybook/preview.ts": [
@@ -208,20 +208,20 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
+                    "defaultValue": "{\n  parameters: {\n    a11y: {\n      disable: false,\n    },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts": [
+            "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "StoryObj<NovaButtonDirective>",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -246,7 +246,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -256,7 +256,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -266,7 +266,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -276,7 +276,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -286,7 +286,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -296,7 +296,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -306,7 +306,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -316,7 +316,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -326,7 +326,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

@@ -3,7 +3,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { NovaButtonDirective } from './button';
 
 const meta: Meta<NovaButtonDirective> = {
-  title: 'Components/Button',
+  title: 'Directives/Button',
   component: NovaButtonDirective,
   decorators: [
     moduleMetadata({

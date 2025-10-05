@@ -14,81 +14,61 @@
                 "name": "AllSizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center;\">\n        <button novaButton size=\"small\">Small</button>\n        <button novaButton size=\"medium\">Medium</button>\n        <button novaButton size=\"large\">Large</button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center;\">\n        <button novaButton size=\"small\">Small</button>\n        <button novaButton size=\"medium\">Medium</button>\n        <button novaButton size=\"large\">Large</button>\n      </div>\n    `,\n  }),\n  async play({ canvas, step }) {\n    const sizes: ReadonlyArray<{ name: string; className: string }> = [\n      { name: 'Small', className: 'nova-button--small' },\n      { name: 'Medium', className: 'nova-button--medium' },\n      { name: 'Large', className: 'nova-button--large' },\n    ];\n\n    for (const size of sizes) {\n      await step(`applies ${size.name} size classes`, async () => {\n        const button = await canvas.findByRole('button', { name: size.name });\n        expect(button).toHaveClass('nova-button', size.className);\n      });\n    }\n  },\n}"
             },
             {
                 "name": "AllVariants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <button novaButton variant=\"primary\">Primary</button>\n        <button novaButton variant=\"secondary\">Secondary</button>\n        <button novaButton variant=\"danger\">Danger</button>\n        <button novaButton variant=\"ghost\">Ghost</button>\n        <button novaButton variant=\"outline\">Outline</button>\n        <button novaButton variant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "AllVariantsAndSizes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  name: 'All Variants × All Sizes',\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 2rem;\">\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Small</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"small\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"small\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"small\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"small\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"small\">Outline</button>\n            <button novaButton variant=\"link\" size=\"small\">Link</button>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Medium (Default)</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"medium\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"medium\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"medium\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"medium\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"medium\">Outline</button>\n            <button novaButton variant=\"link\" size=\"medium\">Link</button>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Large</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"large\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"large\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"large\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"large\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"large\">Outline</button>\n            <button novaButton variant=\"link\" size=\"large\">Link</button>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n        <button novaButton variant=\"primary\">Primary</button>\n        <button novaButton variant=\"secondary\">Secondary</button>\n        <button novaButton variant=\"danger\">Danger</button>\n        <button novaButton variant=\"ghost\">Ghost</button>\n        <button novaButton variant=\"outline\">Outline</button>\n        <button novaButton variant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n  async play({ canvas, step }) {\n    const variants: ReadonlyArray<{ name: string; className: string }> = [\n      { name: 'Primary', className: 'nova-button--primary' },\n      { name: 'Secondary', className: 'nova-button--secondary' },\n      { name: 'Danger', className: 'nova-button--danger' },\n      { name: 'Ghost', className: 'nova-button--ghost' },\n      { name: 'Outline', className: 'nova-button--outline' },\n      { name: 'Link', className: 'nova-button--link' },\n    ];\n\n    for (const variant of variants) {\n      await step(`applies ${variant.name} classes`, async () => {\n        const button = await canvas.findByRole('button', { name: variant.name });\n        expect(button).toHaveClass('nova-button', variant.className);\n      });\n    }\n  },\n}"
             },
             {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (click)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "DirectiveFlexibility",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    fullWidth: true,\n  },\n\n  name: 'Directive Flexibility',\n\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 2rem;\">\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Different Elements</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\">Button Element</button>\n            <a href=\"#\" novaButton variant=\"secondary\">Link Element</a>\n            <div novaButton variant=\"danger\" style=\"cursor: pointer;\">Div Element</div>\n            <span novaButton variant=\"ghost\" style=\"cursor: pointer;\">Span Element</span>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">With Icons</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"small\">\n              <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                <path d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\"/>\n              </svg>\n              Star\n            </button>\n            <button novaButton variant=\"outline\" size=\"medium\">\n              <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                <path d=\"M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z\"/>\n              </svg>\n              Add\n            </button>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  async play({ canvas, step }) {\n    await step('renders with base classes', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toHaveClass('nova-button', 'nova-button--primary', 'nova-button--medium');\n      expect(button).not.toHaveAttribute('disabled');\n      expect(button).not.toHaveClass('nova-button--full-width');\n    });\n  },\n}"
             },
             {
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n        <button novaButton variant=\"primary\" [disabled]=\"true\">Primary</button>\n        <button novaButton variant=\"secondary\" [disabled]=\"true\">Secondary</button>\n        <button novaButton variant=\"danger\" [disabled]=\"true\">Danger</button>\n        <button novaButton variant=\"ghost\" [disabled]=\"true\">Ghost</button>\n        <button novaButton variant=\"outline\" [disabled]=\"true\">Outline</button>\n        <button novaButton variant=\"link\" [disabled]=\"true\">Link</button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: true,\n  },\n  async play({ canvas, step }) {\n    await step('renders disabled button', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toBeDisabled();\n      expect(button).toHaveClass('nova-button--disabled');\n    });\n  },\n}"
             },
             {
                 "name": "FullWidth",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    fullWidth: false,\n  },\n\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `<button novaButton variant=\"primary\" [fullWidth]=\"true\">Full Width Button</button>`,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    fullWidth: true,\n  },\n  async play({ canvas, step }) {\n    await step('renders full width button', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toHaveClass('nova-button', 'nova-button--full-width');\n    });\n  },\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<NovaButtonDirective>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
+                "defaultValue": "{\n  title: 'Directives/Button',\n  component: NovaButtonDirective,\n  tags: ['autodocs'],\n  parameters: {\n    docs: {\n      description: {\n        component: `\n# NovaButton Directive\n\nA directive that applies button styling to native button elements.\n\n## Usage\n\n\\`\\`\\`html\n<button novaButton variant=\"primary\" size=\"medium\">\n  Click me\n</button>\n\\`\\`\\`\n\n## Variants\n\n- **primary**: Primary action button\n- **secondary**: Secondary action button\n- **danger**: Destructive action button\n- **ghost**: Minimal button style\n- **outline**: Outlined button style\n- **link**: Link-style button\n\n## Sizes\n\n- **small**: Compact button for tight spaces\n- **medium**: Standard button size (default)\n- **large**: Prominent button for primary actions\n        `,\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n      description: 'Button visual variant',\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Button size',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    fullWidth: {\n      control: 'boolean',\n      description: 'Whether the button should take full width',\n    },\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <button novaButton [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [fullWidth]=\"fullWidth\">\n        Button Text\n      </button>\n    `,\n  }),\n}"
             },
             {
                 "name": "preview",
@@ -98,7 +78,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
+                "defaultValue": "{\n  parameters: {\n    a11y: {\n      disable: false,\n    },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disabled: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
             }
         ],
         "functions": [],
@@ -108,95 +88,75 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<NovaButtonDirective>",
-                "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 183
+                "kind": 184
             }
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts": [
+            "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts": [
                 {
                     "name": "AllSizes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center;\">\n        <button novaButton size=\"small\">Small</button>\n        <button novaButton size=\"medium\">Medium</button>\n        <button novaButton size=\"large\">Large</button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; align-items: center;\">\n        <button novaButton size=\"small\">Small</button>\n        <button novaButton size=\"medium\">Medium</button>\n        <button novaButton size=\"large\">Large</button>\n      </div>\n    `,\n  }),\n  async play({ canvas, step }) {\n    const sizes: ReadonlyArray<{ name: string; className: string }> = [\n      { name: 'Small', className: 'nova-button--small' },\n      { name: 'Medium', className: 'nova-button--medium' },\n      { name: 'Large', className: 'nova-button--large' },\n    ];\n\n    for (const size of sizes) {\n      await step(`applies ${size.name} size classes`, async () => {\n        const button = await canvas.findByRole('button', { name: size.name });\n        expect(button).toHaveClass('nova-button', size.className);\n      });\n    }\n  },\n}"
                 },
                 {
                     "name": "AllVariants",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n        <button novaButton variant=\"primary\">Primary</button>\n        <button novaButton variant=\"secondary\">Secondary</button>\n        <button novaButton variant=\"danger\">Danger</button>\n        <button novaButton variant=\"ghost\">Ghost</button>\n        <button novaButton variant=\"outline\">Outline</button>\n        <button novaButton variant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "AllVariantsAndSizes",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  name: 'All Variants × All Sizes',\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 2rem;\">\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Small</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"small\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"small\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"small\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"small\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"small\">Outline</button>\n            <button novaButton variant=\"link\" size=\"small\">Link</button>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Medium (Default)</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"medium\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"medium\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"medium\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"medium\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"medium\">Outline</button>\n            <button novaButton variant=\"link\" size=\"medium\">Link</button>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Large</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"large\">Primary</button>\n            <button novaButton variant=\"secondary\" size=\"large\">Secondary</button>\n            <button novaButton variant=\"danger\" size=\"large\">Danger</button>\n            <button novaButton variant=\"ghost\" size=\"large\">Ghost</button>\n            <button novaButton variant=\"outline\" size=\"large\">Outline</button>\n            <button novaButton variant=\"link\" size=\"large\">Link</button>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n        <button novaButton variant=\"primary\">Primary</button>\n        <button novaButton variant=\"secondary\">Secondary</button>\n        <button novaButton variant=\"danger\">Danger</button>\n        <button novaButton variant=\"ghost\">Ghost</button>\n        <button novaButton variant=\"outline\">Outline</button>\n        <button novaButton variant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n  async play({ canvas, step }) {\n    const variants: ReadonlyArray<{ name: string; className: string }> = [\n      { name: 'Primary', className: 'nova-button--primary' },\n      { name: 'Secondary', className: 'nova-button--secondary' },\n      { name: 'Danger', className: 'nova-button--danger' },\n      { name: 'Ghost', className: 'nova-button--ghost' },\n      { name: 'Outline', className: 'nova-button--outline' },\n      { name: 'Link', className: 'nova-button--link' },\n    ];\n\n    for (const variant of variants) {\n      await step(`applies ${variant.name} classes`, async () => {\n        const button = await canvas.findByRole('button', { name: variant.name });\n        expect(button).toHaveClass('nova-button', variant.className);\n      });\n    }\n  },\n}"
                 },
                 {
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      onClick: (event: MouseEvent): void => {\n        console.log('Button clicked!', event);\n      },\n    },\n    imports: [NovaButtonDirective],\n    template: `\n      <button\n        novaButton\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [disabled]=\"disabled\"\n        [fullWidth]=\"fullWidth\"\n        (click)=\"onClick($event)\">\n        Button\n      </button>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "DirectiveFlexibility",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    fullWidth: true,\n  },\n\n  name: 'Directive Flexibility',\n\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 2rem;\">\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">Different Elements</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\">Button Element</button>\n            <a href=\"#\" novaButton variant=\"secondary\">Link Element</a>\n            <div novaButton variant=\"danger\" style=\"cursor: pointer;\">Div Element</div>\n            <span novaButton variant=\"ghost\" style=\"cursor: pointer;\">Span Element</span>\n          </div>\n        </div>\n\n        <div>\n          <h3 style=\"margin-bottom: 1rem; font-size: 1.125rem; font-weight: 600;\">With Icons</h3>\n          <div style=\"display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;\">\n            <button novaButton variant=\"primary\" size=\"small\">\n              <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                <path d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\"/>\n              </svg>\n              Star\n            </button>\n            <button novaButton variant=\"outline\" size=\"medium\">\n              <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                <path d=\"M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z\"/>\n              </svg>\n              Add\n            </button>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: false,\n    fullWidth: false,\n  },\n  async play({ canvas, step }) {\n    await step('renders with base classes', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toHaveClass('nova-button', 'nova-button--primary', 'nova-button--medium');\n      expect(button).not.toHaveAttribute('disabled');\n      expect(button).not.toHaveClass('nova-button--full-width');\n    });\n  },\n}"
                 },
                 {
                     "name": "Disabled",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n        <button novaButton variant=\"primary\" [disabled]=\"true\">Primary</button>\n        <button novaButton variant=\"secondary\" [disabled]=\"true\">Secondary</button>\n        <button novaButton variant=\"danger\" [disabled]=\"true\">Danger</button>\n        <button novaButton variant=\"ghost\" [disabled]=\"true\">Ghost</button>\n        <button novaButton variant=\"outline\" [disabled]=\"true\">Outline</button>\n        <button novaButton variant=\"link\" [disabled]=\"true\">Link</button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    disabled: true,\n  },\n  async play({ canvas, step }) {\n    await step('renders disabled button', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toBeDisabled();\n      expect(button).toHaveClass('nova-button--disabled');\n    });\n  },\n}"
                 },
                 {
                     "name": "FullWidth",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    fullWidth: false,\n  },\n\n  render: () => ({\n    imports: [NovaButtonDirective],\n    template: `<button novaButton variant=\"primary\" [fullWidth]=\"true\">Full Width Button</button>`,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'medium',\n    fullWidth: true,\n  },\n  async play({ canvas, step }) {\n    await step('renders full width button', async () => {\n      const button = await canvas.findByRole('button', { name: /button text/i });\n      expect(button).toHaveClass('nova-button', 'nova-button--full-width');\n    });\n  },\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<NovaButtonDirective>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: NovaButtonDirective,\n  decorators: [\n    moduleMetadata({\n      imports: [NovaButtonDirective],\n    }),\n  ],\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['small', 'medium', 'large'],\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    fullWidth: {\n      control: { type: 'boolean' },\n    },\n  },\n  tags: ['autodocs'],\n}"
+                    "defaultValue": "{\n  title: 'Directives/Button',\n  component: NovaButtonDirective,\n  tags: ['autodocs'],\n  parameters: {\n    docs: {\n      description: {\n        component: `\n# NovaButton Directive\n\nA directive that applies button styling to native button elements.\n\n## Usage\n\n\\`\\`\\`html\n<button novaButton variant=\"primary\" size=\"medium\">\n  Click me\n</button>\n\\`\\`\\`\n\n## Variants\n\n- **primary**: Primary action button\n- **secondary**: Secondary action button\n- **danger**: Destructive action button\n- **ghost**: Minimal button style\n- **outline**: Outlined button style\n- **link**: Link-style button\n\n## Sizes\n\n- **small**: Compact button for tight spaces\n- **medium**: Standard button size (default)\n- **large**: Prominent button for primary actions\n        `,\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n      description: 'Button visual variant',\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Button size',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    fullWidth: {\n      control: 'boolean',\n      description: 'Whether the button should take full width',\n    },\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <button novaButton [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [fullWidth]=\"fullWidth\">\n        Button Text\n      </button>\n    `,\n  }),\n}"
                 }
             ],
             "projects/ngx-nova-ui/.storybook/preview.ts": [
@@ -208,24 +168,24 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disable: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
+                    "defaultValue": "{\n  parameters: {\n    a11y: {\n      disable: false,\n    },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disabled: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts": [
+            "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "StoryObj<NovaButtonDirective>",
-                    "file": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                    "file": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 183
+                    "kind": 184
                 }
             ]
         }
@@ -250,7 +210,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -260,7 +220,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -270,17 +230,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "AllVariantsAndSizes",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -290,17 +240,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "DirectiveFlexibility",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -310,7 +250,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -320,7 +260,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -330,7 +270,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ngx-nova-ui/src/lib/components/button/button.stories.ts",
+                "filePath": "projects/ngx-nova-ui/src/lib/directives/button/button.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

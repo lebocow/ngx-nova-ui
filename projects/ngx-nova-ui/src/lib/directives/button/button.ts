@@ -3,6 +3,7 @@ import { Directive, input } from '@angular/core';
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'outline' | 'link';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
+/** Applies Nova button styles and behaviour to the host element. */
 @Directive({
   selector: '[novaButton]',
   standalone: true,
@@ -23,8 +24,12 @@ export type ButtonSize = 'small' | 'medium' | 'large';
   },
 })
 export class NovaButtonDirective {
+  /** Button visual variant. */
   readonly variant = input<ButtonVariant>('primary');
+  /** Button size. */
   readonly size = input<ButtonSize>('medium');
+  /** Whether the button is disabled. */
   readonly disabled = input(false);
+  /** Whether the button should stretch to the full width of its container. */
   readonly fullWidth = input(false);
 }

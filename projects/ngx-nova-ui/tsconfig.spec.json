@@ -6,6 +6,6 @@
   "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jasmine", "node"]
+    "types": ["jest", "node"]
   }
 }

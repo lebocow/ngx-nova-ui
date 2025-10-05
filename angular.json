@@ -42,6 +42,12 @@
             "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
             "port": 6006,
             "styles": ["projects/ngx-nova-ui/src/lib/styles/nova-ui.css"]
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true,
+              "ci": true
+            }
           }
         },
         "build-storybook": {

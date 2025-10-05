@@ -35,10 +35,11 @@ class ButtonHostComponent {
 
 function testBaseStyles(getButton: () => HTMLButtonElement): void {
   const button = getButton();
+
   expect(button).toBeTruthy();
-  expect(button.classList.contains('nova-button')).toBeTrue();
-  expect(button.classList.contains('nova-button--medium')).toBeTrue();
-  expect(button.classList.contains('nova-button--primary')).toBeTrue();
+  expect(button.classList.contains('nova-button')).toBe(true);
+  expect(button.classList.contains('nova-button--medium')).toBe(true);
+  expect(button.classList.contains('nova-button--primary')).toBe(true);
 }
 
 function testVariantClasses(
@@ -53,9 +54,8 @@ function testVariantClasses(
     fixture.detectChanges();
 
     const button = getButton();
-    expect(button.classList.contains(`nova-button--${variant}`))
-      .withContext(`Missing class for variant ${variant}`)
-      .toBeTrue();
+
+    expect(button.classList.contains(`nova-button--${variant}`)).toBe(true);
   }
 }
 
@@ -71,9 +71,8 @@ function testSizeClasses(
     fixture.detectChanges();
 
     const button = getButton();
-    expect(button.classList.contains(`nova-button--${size}`))
-      .withContext(`Missing class for size ${size}`)
-      .toBeTrue();
+
+    expect(button.classList.contains(`nova-button--${size}`)).toBe(true);
   }
 }
 
@@ -93,8 +92,8 @@ function testStoryboardDefaultArgs(
 
   const button = getButton();
 
-  expect(button.classList.contains(`nova-button--${host.variant}`)).toBeTrue();
-  expect(button.classList.contains(`nova-button--${host.size}`)).toBeTrue();
+  expect(button.classList.contains(`nova-button--${host.variant}`)).toBe(true);
+  expect(button.classList.contains(`nova-button--${host.size}`)).toBe(true);
   expect(button.classList.contains('nova-button--full-width')).toBe(host.fullWidth);
   expect(button.hasAttribute('disabled')).toBe(host.disabled);
 }
@@ -108,8 +107,9 @@ function testDisabledState(
   fixture.detectChanges();
 
   const button = getButton();
-  expect(button.classList.contains('nova-button--disabled')).toBeTrue();
-  expect(button.hasAttribute('disabled')).toBeTrue();
+
+  expect(button.classList.contains('nova-button--disabled')).toBe(true);
+  expect(button.hasAttribute('disabled')).toBe(true);
 }
 
 function testFullWidthState(
@@ -121,7 +121,8 @@ function testFullWidthState(
   fixture.detectChanges();
 
   const button = getButton();
-  expect(button.classList.contains('nova-button--full-width')).toBeTrue();
+
+  expect(button.classList.contains('nova-button--full-width')).toBe(true);
 }
 
 describe('NovaButtonDirective', () => {

@@ -2,6 +2,9 @@ import type { Preview, Decorator } from '@storybook/angular';
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      disable: false,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -9,7 +12,7 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      disable: true,
+      disabled: true,
     },
     layout: 'padded',
   },

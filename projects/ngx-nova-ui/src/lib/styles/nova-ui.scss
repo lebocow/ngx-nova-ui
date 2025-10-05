@@ -1,8 +1,9 @@
 /* Nova UI CSS Reset */
 /* Based on modern CSS reset principles similar to Tailwind's Preflight */
+
 *,
-::before,
-::after {
+*::before,
+*::after {
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
@@ -177,10 +178,12 @@ textarea {
   resize: vertical;
 }
 
-input::placeholder,
-textarea::placeholder {
-  opacity: 1;
-  color: var(--nova-muted-foreground);
+input,
+textarea {
+  &::placeholder {
+    opacity: 1;
+    color: var(--nova-muted-foreground);
+  }
 }
 
 button,
@@ -402,6 +405,7 @@ video {
 
 /* Dark Mode */
 .dark {
+  /* Core Colors */
   --nova-background: #0a0a0a;
   --nova-foreground: #fafafa;
   --nova-card: #171717;
@@ -459,13 +463,15 @@ video {
   color-scheme: dark;
 }
 
-/* Focus Visible Utilities */
-.nova-focus-visible:focus-visible {
-  outline: 2px solid var(--nova-ring);
-  outline-offset: 2px;
+.nova-focus-visible {
+  &:focus-visible {
+    outline: 2px solid var(--nova-ring);
+    outline-offset: 2px;
+  }
 }
 
-/* Smooth Transitions for Theme Changes */
-.nova-theme-transition * {
-  transition: var(--nova-transition-colors) !important;
+.nova-theme-transition {
+  * {
+    transition: var(--nova-transition-colors) !important;
+  }
 }

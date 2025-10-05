@@ -16,7 +16,7 @@ const config: Config = {
   moduleNameMapper: {
     '^projects/ngx-nova-ui/(.*)$': '<rootDir>/projects/ngx-nova-ui/$1',
     '^ngx-nova-ui/(.*)$': '<rootDir>/projects/ngx-nova-ui/src/$1',
-    '\\.(css|scss)$': '<rootDir>/projects/ngx-nova-ui/src/lib/styles/nova-ui.css',
+    '\\.(css|scss)$': '<rootDir>/projects/ngx-nova-ui/src/lib/styles/nova-ui.scss',
     '\\.(svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'html', 'json'],

@@ -41,7 +41,10 @@
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
             "port": 6006,
-            "styles": ["projects/ngx-nova-ui/src/lib/styles/nova-ui.css"]
+            "styles": [
+              "projects/ngx-nova-ui/src/lib/styles/nova-ui.scss",
+              "projects/ngx-nova-ui/src/lib/styles/nova-ui-button.scss"
+            ]
           },
           "configurations": {
             "ci": {
@@ -58,7 +61,10 @@
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ngx-nova-ui"],
             "outputDir": "storybook-static",
-            "styles": ["projects/ngx-nova-ui/src/lib/styles/nova-ui.css"]
+            "styles": [
+              "projects/ngx-nova-ui/src/lib/styles/nova-ui.scss",
+              "projects/ngx-nova-ui/src/lib/styles/nova-ui-button.scss"
+            ]
           }
         },
         "lint": {

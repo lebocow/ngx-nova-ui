@@ -31,6 +31,16 @@
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n        <button novaButton variant=\"primary\">Primary</button>\n        <button novaButton variant=\"secondary\">Secondary</button>\n        <button novaButton variant=\"danger\">Danger</button>\n        <button novaButton variant=\"ghost\">Ghost</button>\n        <button novaButton variant=\"outline\">Outline</button>\n        <button novaButton variant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n  async play({ canvas, step }) {\n    const variants: readonly { name: string; className: string }[] = [\n      { name: 'Primary', className: 'nova-button--primary' },\n      { name: 'Secondary', className: 'nova-button--secondary' },\n      { name: 'Danger', className: 'nova-button--danger' },\n      { name: 'Ghost', className: 'nova-button--ghost' },\n      { name: 'Outline', className: 'nova-button--outline' },\n      { name: 'Link', className: 'nova-button--link' },\n    ];\n\n    for (const variant of variants) {\n      await step(`applies ${variant.name} classes`, async () => {\n        const button = await canvas.findByRole('button', { name: variant.name });\n        expect(button).toHaveClass('nova-button', variant.className);\n      });\n    }\n  },\n}"
             },
             {
+                "name": "config",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "TestRunnerConfig",
+                "defaultValue": "{\n  setup() {\n    expect.extend({ toMatchImageSnapshot });\n  },\n  async preVisit(page) {\n    await page.emulateMedia({ reducedMotion: 'reduce' });\n    await page.setViewportSize({ width: 960, height: 480 });\n    await injectAxe(page);\n  },\n  async postVisit(page, context) {\n    await checkA11y(page, '#storybook-root', {\n      detailedReport: true,\n      detailedReportOptions: { html: true },\n    });\n\n    await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 5000 });\n    await waitForPageReady(page);\n    const id = context?.id ?? 'unknown';\n    const updateSnapshots = process.env['UPDATE_STORYBOOK_SNAPSHOTS'] === '1';\n    const snapshotPath = path.join(SNAPSHOT_DIR, `${id}.png`);\n\n    if (!updateSnapshots) {\n      try {\n        await access(snapshotPath, fsConstants.F_OK);\n      } catch {\n        throw new Error(`Missing baseline snapshot for \"${id}\". Run: npm run test:stories:update`);\n      }\n    } else {\n      await mkdir(SNAPSHOT_DIR, { recursive: true });\n    }\n\n    const image = await page.screenshot({ animations: 'disabled' });\n\n    expect(image).toMatchImageSnapshot({\n      customSnapshotIdentifier: id,\n      customSnapshotsDir: SNAPSHOT_DIR,\n      failureThreshold: 0.01,\n      failureThresholdType: 'percent',\n      updatePassedSnapshot: updateSnapshots,\n    });\n  },\n}"
+            },
+            {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -79,6 +89,16 @@
                 "deprecationMessage": "",
                 "type": "Preview",
                 "defaultValue": "{\n  parameters: {\n    a11y: {\n      disable: false,\n    },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      disabled: true,\n    },\n    layout: 'padded',\n  },\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Global theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'circle',\n        items: [\n          { value: 'light', icon: 'sun', title: 'Light' },\n          { value: 'dark', icon: 'moon', title: 'Dark' },\n          { value: 'system', icon: 'browser', title: 'System' },\n        ],\n        showName: true,\n      },\n    },\n  },\n  decorators: [\n    ((story, context) => {\n      const { theme } = context.globals;\n      const root = document.documentElement;\n      const isDark =\n        theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);\n      root.classList.toggle('dark', isDark);\n      return story();\n    }) as Decorator,\n  ],\n}"
+            },
+            {
+                "name": "SNAPSHOT_DIR",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "path.join(process.cwd(), 'projects/ngx-nova-ui/__image_snapshots__')"
             }
         ],
         "functions": [],
@@ -159,6 +179,28 @@
                     "defaultValue": "{\n  title: 'Directives/Button',\n  component: NovaButtonDirective,\n  tags: ['autodocs'],\n  parameters: {\n    docs: {\n      description: {\n        component: `\n# NovaButton Directive\n\nA directive that applies button styling to native button elements.\n\n## Usage\n\n\\`\\`\\`html\n<button novaButton variant=\"primary\" size=\"medium\">\n  Click me\n</button>\n\\`\\`\\`\n\n## Variants\n\n- **primary**: Primary action button\n- **secondary**: Secondary action button\n- **danger**: Destructive action button\n- **ghost**: Minimal button style\n- **outline**: Outlined button style\n- **link**: Link-style button\n\n## Sizes\n\n- **small**: Compact button for tight spaces\n- **medium**: Standard button size (default)\n- **large**: Prominent button for primary actions\n        `,\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'danger', 'ghost', 'outline', 'link'],\n      description: 'Button visual variant',\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Button size',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    fullWidth: {\n      control: 'boolean',\n      description: 'Whether the button should take full width',\n    },\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <button novaButton [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [fullWidth]=\"fullWidth\">\n        Button Text\n      </button>\n    `,\n  }),\n}"
                 }
             ],
+            "projects/ngx-nova-ui/.storybook/test-runner.ts": [
+                {
+                    "name": "config",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TestRunnerConfig",
+                    "defaultValue": "{\n  setup() {\n    expect.extend({ toMatchImageSnapshot });\n  },\n  async preVisit(page) {\n    await page.emulateMedia({ reducedMotion: 'reduce' });\n    await page.setViewportSize({ width: 960, height: 480 });\n    await injectAxe(page);\n  },\n  async postVisit(page, context) {\n    await checkA11y(page, '#storybook-root', {\n      detailedReport: true,\n      detailedReportOptions: { html: true },\n    });\n\n    await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 5000 });\n    await waitForPageReady(page);\n    const id = context?.id ?? 'unknown';\n    const updateSnapshots = process.env['UPDATE_STORYBOOK_SNAPSHOTS'] === '1';\n    const snapshotPath = path.join(SNAPSHOT_DIR, `${id}.png`);\n\n    if (!updateSnapshots) {\n      try {\n        await access(snapshotPath, fsConstants.F_OK);\n      } catch {\n        throw new Error(`Missing baseline snapshot for \"${id}\". Run: npm run test:stories:update`);\n      }\n    } else {\n      await mkdir(SNAPSHOT_DIR, { recursive: true });\n    }\n\n    const image = await page.screenshot({ animations: 'disabled' });\n\n    expect(image).toMatchImageSnapshot({\n      customSnapshotIdentifier: id,\n      customSnapshotsDir: SNAPSHOT_DIR,\n      failureThreshold: 0.01,\n      failureThresholdType: 'percent',\n      updatePassedSnapshot: updateSnapshots,\n    });\n  },\n}"
+                },
+                {
+                    "name": "SNAPSHOT_DIR",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "path.join(process.cwd(), 'projects/ngx-nova-ui/__image_snapshots__')"
+                }
+            ],
             "projects/ngx-nova-ui/.storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -205,6 +247,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "config",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-nova-ui/.storybook/test-runner.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SNAPSHOT_DIR",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -1,9 +1,9 @@
 {
   "extends": "../tsconfig.lib.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "jest", "jest-image-snapshot"],
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*.stories.*", "./preview.ts"]
+  "include": ["../src/**/*.stories.*", "./preview.ts", "./test-runner.ts"]
 }
